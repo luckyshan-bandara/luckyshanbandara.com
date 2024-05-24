@@ -1,0 +1,35 @@
+---
+title: 'Sorting Algorithms in java'
+publishedAt: '2024-05-22'
+summary: 'Here we wre going to discuss simple Sorting algorithms first'
+---
+
+Here we start with the basic simple sorting algorithms first.
+
+## Bubble Sort
+
+```java
+public class BubbleSort {
+    public static void main(String[] args) {
+        int[] arr = {9,8,7,6,5,4,3,2,1};
+        arr = sort(arr);
+        for (int i=0; i< arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+
+    public static int[] sort(int[] arr) {
+        for (int lastUnsortedPartitionIndex=arr.length-1; lastUnsortedPartitionIndex>0; lastUnsortedPartitionIndex--) {
+            for (int j = 0; j < lastUnsortedPartitionIndex; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+        return arr;
+    }
+}
+```
+To be continued...
