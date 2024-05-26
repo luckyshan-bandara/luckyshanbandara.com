@@ -8,6 +8,9 @@ Here we start with the basic simple sorting algorithms first.
 
 ## Bubble Sort
 
+First we devide the array logically into two partitions: Sorted partition and unsorted partition.
+We move larger elements into the right in each iteration.
+
 ```java
 public class BubbleSort {
     public static void main(String[] args) {
@@ -32,4 +35,124 @@ public class BubbleSort {
     }
 }
 ```
-To be continued...
+<br/>
+* This is in-place algorithm. In-place means that the extra memory we need does not depend on the number of array elements to be sorted.
+* Time complexity is quadratic - O(n^2)
+* Stable sort. If duplicate elements exists, it will keep their original order after sorting.
+
+## Selection Sort
+
+First we devide the array logically into two partitions: Sorted partition and unsorted partition.
+Each iteration we select the largest element index, and swap it with the last unsorted partition index.
+
+```java
+public class SelectionSort {
+    public static void main(String[] args) {
+        int[] arr = {9,8,7,6,5,4,3,2,1};
+        arr = sort(arr);
+        for (int i=0; i< arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+
+    public static int[] sort(int[] arr) {
+        for(int lastUnsortedPartitionIndex = arr.length -1; lastUnsortedPartitionIndex > 0; lastUnsortedPartitionIndex--) {
+            int largestIndex = 0;
+            for (int i = 1; i <= lastUnsortedPartitionIndex; i++) {
+                if (arr[largestIndex] < arr[i]) {
+                    largestIndex = i;
+                }
+            }
+            //swap
+            int temp = arr[largestIndex];
+            arr[largestIndex] = arr[lastUnsortedPartitionIndex];
+            arr[lastUnsortedPartitionIndex] = temp;
+        }
+        return arr;
+    }
+}
+```
+<br/>
+* In-place algorithm
+* Time complexity is quadratic - O(n^2)
+* Does not require as much swapping as bubble sort
+* Unstable algorithm
+
+## Insertion Sort
+
+Here also, first we devide the array logically into two partitions: Sorted partition and unsorted partition.
+* Assume index 0 is the sorted array partition initially.
+* Then the first unsorted index becomes 1 from the unsorted partition.
+* Now on each iteration, we take the first element from the unsorted partition (firstUnsortedIndex) and we insert it into the sorted partition.
+* So at the end of each iteration, we have grown up the sorted array partition by one.
+
+<br/>
+```java
+public class InsertionSort {
+    public static void main(String[] args) {
+        int[] arr = {9,8,7,6,5,4,3,2,1};
+        arr = sort(arr);
+        for (int i=0; i< arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+
+    public static int[] sort(int[] arr) {
+        for (int firstUnsortedIndex=1; firstUnsortedIndex< arr.length; firstUnsortedIndex++) {
+            // no need swapping
+            // find the index and add new element to that index directly
+            // initially index 0 is considered as the sorted array partition
+            // we grow that sorted partition one by one
+            int newElement = arr[firstUnsortedIndex];
+            int index;
+            for (index=firstUnsortedIndex; index>0 && arr[index-1] > newElement ; index--) {
+                // shifting sorted partition elements until we find correct position to insert new element
+                arr[index] = arr[index-1];
+            }
+
+            arr[index] = newElement; // insert new element
+        }
+
+        return arr;
+    }
+}
+```
+<br/>
+* In-place algorithm
+* Time complexity is quadratic - O(n^2)
+* No swapping
+* Stable algorithm
+
+## Other Sort Algorithms
+<br/>
+##### Shell Sort
+* A variation of insertion sort.
+* In-place algorithm
+* Introduce gap value
+* Doesn't require as much shifting as insertion sort, so it usually performs better than insertion sort
+* Unstable sort
+<br/>
+##### Merge Sort
+ * Divide and conquer algorithm
+ * Recursive algorithm
+ * Two phases: Splitting and Merging
+ * Not an in-place algorithm
+ * O(nlogn) time complexity
+ * Stable algorithm
+ <br/>
+##### Quick Sort
+ * Divide and conquer algorithm
+ * Recursive algorithm
+ * Uses a pivot element to partition the array into two parts 
+ * In-place algorithm
+ * O(nlogn) time complexity
+ * Unstable algorithm
+ <br/>
+ ##### Counting Sort
+ * Makes assumptions about the data
+ * Doesn't use comparisons
+ * Counts the numberof occurrences of each value
+ <br/>
+  ##### Radix Sort
+ * Makes assumptions about the data
+ * Data must have same radix and width (The radix for the decimal system is 10, binary it is 2, alphebet its 26)
