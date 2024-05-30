@@ -138,6 +138,7 @@ public class InsertionSort {
  <br/>
  ```java
  public class MergeSort {
+
     public static void main(String[] args) {
         int[] arr = {9,8,7,6};
         mergeSort(arr, 0, arr.length);
@@ -147,6 +148,7 @@ public class InsertionSort {
             System.out.print(arr[i] + " ");
         }
     }
+
     public static void mergeSort(int[] inputArray, int start, int end) {
         System.out.println("start = "+start+ " : end = "+end);
         if (end - start < 2) {
@@ -157,6 +159,7 @@ public class InsertionSort {
         mergeSort(inputArray, mid, end);
         merge(inputArray, start, mid, end);
     }
+    
     public static void merge(int[] inputArray, int start, int mid, int end) {
         System.out.println("merge:---------------> "+"start = "+start + " | mid = "+mid + " | end = "+end);
         if (inputArray[mid-1] < inputArray[mid]) {
