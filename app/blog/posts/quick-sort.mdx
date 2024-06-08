@@ -1,0 +1,130 @@
+---
+title: 'Quick Sort in java'
+publishedAt: '2024-06-08'
+summary: 'Here we wre going to discuss quick sort in java'
+---
+
+Here we implement quick sort.
+ * Divide and conquer algorithm
+ * Recursive algorithm
+ * Uses a pivot element to partition the array into two parts 
+ * This implementation considers first element as the pivot element
+ * All elements left to the pivot Element should be less than pivot Element
+ * All elements right to the pivot Element should be larger than pivot Element
+ 
+ * In-place algorithm
+ * O(nlogn) time complexity
+ * Unstable algorithm
+ <br/>
+
+ ```java
+ public class QuickSort {
+    public static void main(String[] args) {
+        int[] arr = {6,5,1,2,3,7,4,8,9};
+        quickSort(arr, 0, arr.length);
+        System.out.print("Sorted array: ");
+        for (int i=0; i< arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+    public static void quickSort(int[] inputArray, int start, int end) {
+        if (end - start < 2) {
+            return;
+        }
+        int pivotIndex = getPivotIndex(inputArray, start, end);
+        quickSort(inputArray, start, pivotIndex);
+        quickSort(inputArray, pivotIndex+1, end);
+    }
+    private static int getPivotIndex(int[] input, int start, int end) {
+        // consider first element as the pivot element
+        int pivot = input[start];
+        // all elements left to the pivotElement should be less than pivotElement
+        // all elements right to the pivotElement should be larger than pivotElement
+        System.out.println("Pivot index= "+start+ ", Pivot element= "+pivot);
+        System.out.println("Array before processing with pivot element: ");
+        for(int i =0; i< input.length; i++) {
+            System.out.print(input[i] + " ");
+        }
+        System.out.println();
+        int i = start;
+        int j = end;
+        while (i < j) {
+            // NOTE: empty loop body
+            while (i < j && input[--j] >= pivot);
+            if (i < j) {
+                input[i] = input[j];
+            }
+            // NOTE: empty loop body
+            while (i < j && input[++i] <= pivot);
+            if (i < j) {
+                input[j] = input[i];
+            }
+        }
+        input[j] = pivot;
+        System.out.println("Array after processing with pivot element: ");
+        for(int k =0; k< input.length; k++) {
+            System.out.print(input[k] + " ");
+        }
+        System.out.println("");
+        System.out.println("------");
+        return j;
+    }
+}
+ ```
+  <br/>
+
+ #### Console output
+
+ <br/>
+
+```
+    Pivot index= 0, Pivot element= 6
+    Array before processing with pivot element: 
+    6 5 1 2 3 7 4 8 9 
+    Array after processing with pivot element: 
+    4 5 1 2 3 6 7 8 9 
+    ------
+    Pivot index= 0, Pivot element= 4
+    Array before processing with pivot element: 
+    4 5 1 2 3 6 7 8 9 
+    Array after processing with pivot element: 
+    3 2 1 4 5 6 7 8 9 
+    ------
+    Pivot index= 0, Pivot element= 3
+    Array before processing with pivot element: 
+    3 2 1 4 5 6 7 8 9 
+    Array after processing with pivot element: 
+    1 2 3 4 5 6 7 8 9 
+    ------
+    Pivot index= 0, Pivot element= 1
+    Array before processing with pivot element: 
+    1 2 3 4 5 6 7 8 9 
+    Array after processing with pivot element: 
+    1 2 3 4 5 6 7 8 9 
+    ------
+    Pivot index= 6, Pivot element= 7
+    Array before processing with pivot element: 
+    1 2 3 4 5 6 7 8 9 
+    Array after processing with pivot element: 
+    1 2 3 4 5 6 7 8 9 
+    ------
+    Pivot index= 7, Pivot element= 8
+    Array before processing with pivot element: 
+    1 2 3 4 5 6 7 8 9 
+    Array after processing with pivot element: 
+    1 2 3 4 5 6 7 8 9 
+    ------
+    Sorted array: 1 2 3 4 5 6 7 8 9 
+    Process finished with exit code 0
+```
+
+ ## Other Sort Algorithms...
+
+ ##### Counting Sort
+ * Makes assumptions about the data
+ * Doesn't use comparisons
+ * Counts the numberof occurrences of each value
+ <br/>
+  ##### Radix Sort
+ * Makes assumptions about the data
+ * Data must have same radix and width (The radix for the decimal system is 10, binary it is 2, alphebet its 26)
