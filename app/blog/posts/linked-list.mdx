@@ -1,0 +1,134 @@
+---
+title: 'Linked Lists in java'
+publishedAt: '2024-06-09'
+summary: 'Here we wre going to discuss linked lists in java'
+---
+
+Let's start exploring linked lists. A linked list is a type of data structure. 
+It's a series of connected objects, but it doesn’t involve arrays. \
+In a linked list, each element is connected to another because each element includes a reference to the next one. \
+This is different from arrays and array-based lists. 
+In an array, each element doesn't know about the others, but in a linked list, each element knows the next one in sequence, 
+requiring additional information to be stored with each element.
+
+With an array of integers, we only store the integer values, 
+but with a linked list, we store both the integer value and a reference to the next integer.
+
+* For our implementation, we'll use an Employee class.
+* Each element in a linked list is known as a node.
+* The first element is called the head, and the last node points to null, indicating the end of the list.
+* We'll create a Node class with a field for the data held in the node, in this case, an Employee field.
+* Additionally, there will be a next field which is of type Node, as each node points to the next one.
+
+<br/>
+
+<Image
+  src="/posts/singly-linked-list/singly-linked-list.png"
+  title="A picture a successful check in the pull request"
+  width={1100}
+  height={310}
+/>
+
+This structure is known as a singly linked list since each node links to the next one only.
+
+ <br/>
+
+ ```java
+ public class Employee {
+    private String name;
+    private String address;
+    public Employee(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
+}
+ ```
+  <br/>
+
+```java
+public class EmployeeNode {
+    private Employee employee;
+    private EmployeeNode next;
+    public EmployeeNode(Employee employee) {
+        this.employee = employee;
+    }
+    public EmployeeNode getNext() {
+        return next;
+    }
+    public void setNext(EmployeeNode next) {
+        this.next = next;
+    }
+    @Override
+    public String toString() {
+        return employee.toString();
+    }
+}
+ ```
+  <br/>
+
+```java
+public class EmployeeLinkedList {
+    private EmployeeNode head;
+    private int size;
+    public void addToFirst(Employee employee) {
+        EmployeeNode node = new EmployeeNode(employee);
+        node.setNext(head);
+        head = node;
+        size++;
+    }
+    public void printList() {
+        EmployeeNode current = head;
+        while (current != null) {
+            System.out.println(current.toString());
+            current = current.getNext();
+        }
+    }
+}
+ ```
+<br/>
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Employee e1 = new Employee("Kamal", "Balangoda");
+        Employee e2 = new Employee("Bimal", "Ratnapura");
+        Employee e3 = new Employee("Sumal", "Colombo");
+        EmployeeLinkedList employeeLinkedList = new EmployeeLinkedList();
+        employeeLinkedList.addToFirst(e1);
+        employeeLinkedList.addToFirst(e2);
+        employeeLinkedList.addToFirst(e3);
+        employeeLinkedList.printList();
+    }
+}
+ ```
+  <br/>
+
+ #### Console output
+
+ <br/>
+
+```
+    Employee{name='Sumal', address='Colombo'}
+    Employee{name='Bimal', address='Ratnapura'}
+    Employee{name='Kamal', address='Balangoda'}
+    Process finished with exit code 0
+```
+
+<br/>
+
+### The LinkedList class in Java 
+In Java, we don't need to manually implement a linked list because a linked list class is already provided.
+
+<Image
+  src="/posts/singly-linked-list/inbuilt-linked-list.png"
+  title="A picture a successful check in the pull request"
+  width={1100}
+  height={310}
+/>
